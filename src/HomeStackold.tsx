@@ -1,17 +1,32 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Center } from "./Center";
+import { Center } from "./components/Center";
 import { Text, TouchableOpacity, FlatList, Button } from "react-native";
-import { AuthContext } from "./AuthProvider";
+import { AuthContext } from "./providers/AuthProvider";
 import faker from "faker";
 import { HomeParamList, HomeStackNavProps } from "./HomeParamList";
 import { addProductRoutes } from "./addProductRoutes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface HomeStackProps {}
 
 const Stack = createStackNavigator<HomeParamList>();
 
+const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split(".")[1]));
+  } catch (e) {
+    return null;
+  }
+};
+
 function Feed({ navigation }: HomeStackNavProps<"Feed">) {
+  AsyncStorage.getItem("token").then((x) => {
+    console.log(x);
+    console.log("token ->", x);
+  });
+  //console.log(token)
+
   return (
     <Center>
       <FlatList
@@ -22,7 +37,7 @@ function Feed({ navigation }: HomeStackNavProps<"Feed">) {
               title={item}
               onPress={() => {
                 navigation.navigate("Product", {
-                  name: item
+                  name: item,
                 });
               }}
             />
@@ -53,7 +68,7 @@ export const HomeStack: React.FC<HomeStackProps> = ({}) => {
                 <Text>LOGOUT</Text>
               </TouchableOpacity>
             );
-          }
+          },
         }}
         component={Feed}
       />

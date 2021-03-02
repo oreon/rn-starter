@@ -1,0 +1,11 @@
+{
+    "editor.formatOnSave": false,
+    // Enable per-language
+    "[javascript]": {
+        "editor.formatOnSave": true
+    }
+    
+    //"editor.formatOnSave": true,
+    //"editor.formatOnSaveTimeout": 3000,
+    //"python.formatting.blackPath": "/home/agdeepsingh/.local/bin/black"
+  }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SearchParamList } from "./SearchParamList";
 import { Button, FlatList } from "react-native";
-import { Center } from "./Center";
+import { Center } from "./components/Center";
 import faker from "faker";
 import { addProductRoutes } from "./addProductRoutes";
 

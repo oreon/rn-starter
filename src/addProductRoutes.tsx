@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { TouchableOpacity, Text, Button } from "react-native";
 import { HomeStackNavProps, HomeParamList } from "./HomeParamList";
-import { Center } from "./Center";
+import { Center } from "./components/Center";
 import { StackNavigationState, TypedNavigator } from "@react-navigation/native";
 import { SearchParamList, SearchStackNavProps } from "./SearchParamList";
 

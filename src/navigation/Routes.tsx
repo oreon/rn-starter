@@ -4,25 +4,27 @@ import {
   StackNavigationProp
 } from "@react-navigation/stack";
 import { NavigationContainer, RouteProp } from "@react-navigation/native";
-import { ActivityIndicator, AsyncStorage } from "react-native";
-import { Center } from "./Center";
-import { AuthContext } from "./AuthProvider";
-import { AppTabs } from "./AppTabs";
+
+import { Center } from "../components/Center";
+import { AuthContext } from "../providers/AuthProvider";
+import { AppTabs } from "../AppTabs";
 import { AuthStack } from "./AuthStack";
+import { ActivityIndicator } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface RoutesProps {}
 
 export const Routes: React.FC<RoutesProps> = ({}) => {
-  const { user, login } = useContext(AuthContext);
+  const { user, tokenLogin } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // check if the user is logged in or not
-    AsyncStorage.getItem("user")
-      .then(userString => {
-        if (userString) {
+    AsyncStorage.getItem("token")
+      .then(token => {
+        if (token) {
           // decode it
-          login();
+          tokenLogin(token)
         }
         setLoading(false);
       })
@@ -34,14 +36,14 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
   if (loading) {
     return (
       <Center>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator />
       </Center>
     );
   }
 
   return (
     <NavigationContainer>
-      {user ? <AppTabs /> : <AuthStack />}
+      {user?.token ? <AppTabs /> : <AuthStack />}
     </NavigationContainer>
   );
 };

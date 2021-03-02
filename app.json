@@ -3,7 +3,6 @@
     "name": "rn-example",
     "slug": "rn-examp",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
